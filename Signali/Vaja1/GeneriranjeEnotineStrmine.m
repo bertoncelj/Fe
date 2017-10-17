@@ -1,12 +1,13 @@
+%Generiranje enotine strmine
 clear all; close all;
-dt = 0.1; %časovni inkrement
-%defeniranje časonih omočji in vrednosti singnalov
+dt = 0.01;  %časovni inkrement
+%definiranje časovnih območji in vrednosti signalov
 t1 = -4 : dt : 0; r1 = zeros(size(t1));
-t2 = dt : dt : 4; r2  =  t2;
-t = [t1 t2]; r = [r1 r2]; %časonvi in singalni vektor
+t2 =  dt : dt : 4; r2 = t2;
+t = [t1 t2]; r = [r1 r2]; %časovni in signalni vektor
 plot(t, r, 'LineWidth', 2);
-axis([-4 4 -1 4]);
+axis([-7 7 -1 4]);
 grid;
-set(gca, 'FontName', 'Times New Roamn', 'FontSize', 12);
-xlabel('čas {\itt} [s]'); ylabel('{\itu}({\itt})');
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 12);
+xlabel('čas {\itt} [s]'); ylabel('{\itr}({\itt})');
 title('Enotina strmina');
