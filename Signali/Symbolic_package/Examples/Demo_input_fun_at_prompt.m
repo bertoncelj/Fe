@@ -17,7 +17,8 @@ df=function_handle(ffd)
 ffdd=diff(ffd);
 ddf=function_handle(ffdd)
 % and now plot them all 
-x1=-2:.0001:2;
+x1 = -10 : .01 : 10;
 plot(x1,f(x1),x1,df(x1),x1,ddf(x1))
+axis([-10 10 -3 3])
 grid minor on
 legend("f","f '", "f '' ")

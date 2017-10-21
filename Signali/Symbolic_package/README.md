@@ -1,10 +1,10 @@
 # Symbolic package
 
-Symbolic package is presented with some basic exampels and how to use it. It uses Pyhton and SymPy which is a Pyhton library for ymbolic mathematics.
+Symbolic package is presented with some basic exampels and how to use it. It uses Pyhton and SymPy which is a Pyhton library for symbolic mathematics. 
 
 ## Package
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These package is made by [Ocave-Forge](https://octave.sourceforge.io/index.php). On their site you can get some other [Packages](https://octave.sourceforge.io/packages.php). For calculation ODE equations we need symbolic library for ana
 
 ### How to Install
 
