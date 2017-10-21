@@ -13,15 +13,25 @@ These instructions will get you a copy of the project up and running on your loc
     website for details on how to install SymPy.
 
 2.  Install SymPy by github repository
-* Get the latest version of SymPy from [GitHub](https://pypi.python.org/pypi/sympy/) To get git version do
+
+Download and installation SymPy
+--------
+
+1. Get the latest version of SymPy from [GitHub](https://pypi.python.org/pypi/sympy/) To get git version do
 ```
 $ git clone git://github.com/sympy/sympy.git
 ```
-* To install SymPy itself, then simply run:
+2. To install SymPy itself, then simply run:
 ```
  sudo python setup.py install
 ```
 For more info goto [README](https://github.com/sympy/sympy/blob/master/README.rst) of SymPy.
+
+Installation symbolic package
+-------
+
+1.  Install the dependencies with (terminal)
+    `sudo apt-get install octave liboctave-dev python-sympy`.
 
 2.  Start Octave.
 
@@ -32,23 +42,41 @@ For more info goto [README](https://github.com/sympy/sympy/blob/master/README.rs
 5.  At Octave prompt, type `syms x`, then `f = (sin(x/2))^3`,
     `diff(f, x)`, etc.
 
-### Usage
+### Possible problems
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
+1. SymPy older version needs to be updated 
+```
+configure: error: SymPy version 0.7.5 or later is required
+checking for sort... /usr/bin/sort
+checking for GNU coreutils... yes
+checking for python... /usr/bin/python
+checking python module: sympy... yes
+checking for SymPy version... 0.7.4.1
+checking for gawk... gawk
+pkg: error running the configure script for symbolic.
+error: called from 'configure_make' in file /usr/share/octave/4.0.0/m/pkg/private/configure_make.m near line 79, column 9? 
+```
+The solution is to check if you have pip
 
 ```
-Give the example
+sudo apt-cache policy python-pip
+```
+if it is installed. If not installed run:
+
+```
+sudo apt-get install python-pip
+```
+Now you can run pip to get the new sympy
+
+```
+pip install --user sympy
+```
+Finally back to octave to run
+```
+pkg install -forge symbolic
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+If it si somethink new just added soluton down below.
 
 ## Running the tests
 
