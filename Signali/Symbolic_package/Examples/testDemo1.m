@@ -5,23 +5,8 @@
  a = pi/2
 
 ## now do some work with the symbolic pkg
- syms x
- f = x * cos(x)
- df = diff(f)
 
-## Now we want to evaluate df at a:
-
- # subs (df, x, a)     # this gives the "rats" warning (and gives a symbolic answer)
-
-## So instead, try
-
- dfh = function_handle (df)
-
- dfh (a)
-
-
-
-## And you can evaluate dfh at an array of "double" values:
-
- dfh ([1.23 12.3 pi/2])
-
+function dydt = f(t,y)
+dydt(1) = y(2);
+dydt(2) = y(3);
+dydt(3) = y(1)*y(3)-1;
