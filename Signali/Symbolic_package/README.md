@@ -25,7 +25,11 @@ $ git clone git://github.com/sympy/sympy.git
 ```
  sudo python setup.py install
 ```
-For more info goto [README](https://github.com/sympy/sympy/blob/master/README.rst) of SymPy.
+If mpmath is not install or older version, try:
+```
+sudo apt-get install python-mpmath
+```
+For more info how to install SymPy goto [README](https://github.com/sympy/sympy/blob/master/README.rst) of SymPy.
 
 Installation symbolic package
 -------
