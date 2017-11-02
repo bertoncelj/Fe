@@ -1,5 +1,7 @@
 clear all; close all;
 
+#Program display Im vs Re components and grpah them
+ 
 R = 0 : 1 : 1000;
 C = 1/1000000;
 L = 1/100;

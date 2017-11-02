@@ -32,7 +32,7 @@ function [u_ret, t_ret] = do_period( signal, time, repeat)
    t_ret = t_nov;
    return;
 endfunction
-
+# Program Strat
 ###############################
 #Signal description
 dt = 0.02;  %časovni inkrement
@@ -53,7 +53,7 @@ dt = 0.02;  %časovni inkrement
   u = [u1 u2 u3 u4 u5 u6 u7 u8];
 
   
-#function call
+#function call do_period
   [signal, cas] = do_period(u, t, 3);
 
 #draw result
