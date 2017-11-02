@@ -5,12 +5,20 @@
    lahko modeliramo z diferencialno enačbo drugega reda, oblike: 
 		
 ![first equation](http://latex.codecogs.com/gif.latex?%5Cfrac%7Bd%5E%7B2%7D%20y%28t%29%20%7D%7Bdt%5E%7B2%7D%7D%20&plus;%202%5Czeta%20%5Comega%20_%7Bn%7D%5Cfrac%7Bdy%28t%29%7D%7Bdt%7D&plus;%5Comega%20_%7Bn%7D%5E%7B2%7Dy%28t%29%20%3D%20Kx%28t%29)
-	
+
+![first equation](http://latex.codecogs.com/gif.latex?a_2%5Cfrac%7Bd%5E2%20y%28t%29%7D%7Bdt%5E2%7D%20&plus;%20a_1%5Cfrac%7Bdy%7D%7Bdt%7D%20&plus;%20a_0%20y%28t%29%20%3D%200%20%3B%20y%28t%29%20%3D%20Ce%5E%7Bst%7D%20%5Crightarrow%20a_2s%5E2%20&plus;a_1s%20&plus;%20a_0%20%3D%200)
+
+![first equation](http://latex.codecogs.com/gif.latex?s%5E2%20&plus;%20%5Cfrac%7Ba_%7B1%7D%7D%7Ba_2%7Ds%20&plus;%20%5Cfrac%7Ba_0%7D%7Ba_2%7D%20%3D%20s%5E2%20&plus;%202%5Czeta%20%5Comega%20_n%20s%20&plus;%20%5Comega%20_%7Bn%7D%5E%7B2%7D%20%3D%20s%5E2%20&plus;%202%5Czeta%20%5Comega%20_n%20s%20&plus;%20%5Comega_n%5E2)	
+
  1.a Zapišite diferencialno enačbo v dani standardni obliki za primer serijskega RLC vezja
 s priključenim napetostnim generatorjem vg(t) na vhodu in napetostjo na kondenzatorju
 kot izhodno napetostjo (vizh(t)=vC(t)) ter izrazite ωn, ζ in K z elementi vezja. 
 
    ![vezje 1a naloga](https://user-images.githubusercontent.com/4838487/32341679-78037378-bffe-11e7-99b3-617f72871346.png)
+
+![solution of equation](http://latex.codecogs.com/gif.latex?LC%5Cfrac%7Bd%5E2U_o%28t%29%7D%7Bdt%5E2%7D%20&plus;%20RC%5Cfrac%7BdU_o%28t%29%7D%7Bdt%7D%20&plus;%20U_o%28t%29%20%3D%20V_g%28t%29)
+
+![wn and zeta](http://latex.codecogs.com/gif.latex?%5Comega_n%20%3D%20%5Cfrac%7B1%7D%7B%5Csqrt%7BLC%7D%7D%3B%20%5Czeta%20%3D%20%5Cfrac%7B1%7D%7B2%7DR%5Csqrt%7B%5Cfrac%7BC%7D%7BL%7D%7D)
 
  1.b Predpostavite, da sta L in C konstantna, in sicer L = 10 mH in C = 1 µF, upornost R pa
  naj se spreminja v območju od 0 do ∞. Določite območja vrednosti R, pri katerih sta
