@@ -16,7 +16,8 @@ s2 = Wn * (-zeta - sqrt(zeta.^2 -1));
 
 
 plot(real(s1), imag(s1), 'r', real(s2), imag(s2), 'g');
-axis([-5 25 -0.1 1.2]); grid;
+axis([-20000 0 -10000 10000]); 
+grid;
 xlabel('Re[s]');
 ylabel('Im[s]');
 title('Odziv na zacetno stanje sistema druge reda');
