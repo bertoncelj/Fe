@@ -36,3 +36,16 @@ enotino stopnico (vg(t) = u(t)) pri ničelnem začetnem stanju.
 1.g Program MATLAB dopolnite tako, da bo izračunal in grafično prikazal še tok skozi
  tuljavo iL(t), in sicer za primera pod 1.e in 1.f. Za hkratno risanje vC(t) in iL(t)
  uporabite ukaz subplot. 
+ 
+ 2. Zapišite diferencialno enačbo za tok skozi tuljavo iL(t) in jo rešite s pomočjo programa
+ MATLAB. Program dopolnite, da bo izračunal še napetost na kondenzatorju vC(t) in
+ nato obe spremenljivki grafično prikazal na podgrafih.
+ (C = 1 mF, L = 110 mH, R1 = 100 Ω, R2 = 10 Ω, iL(0) = 1 A, vC(0) = 0 V) 
+ 
+ 3. Zapišite diferencialno enačbo za tok skozi tuljavo iL(t) in jo rešite s pomočjo programa
+ MATLAB. Program dopolnite, da bo izračunal še napetost na kondenzatorju vC(t) in
+ nato obe spremenljivki grafično prikazal na podgrafih. Krmiljenje naj bo enotina
+ stopnica (ig = u(t)), nato pa še sinusni signal (ig = sin(t)).
+ (C = 1 F, L = 1 H, R = 2Ω, iL(0) = 0 A, vC(0) = 0 V) 
+ 
+ 
