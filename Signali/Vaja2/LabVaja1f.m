@@ -1,5 +1,8 @@
 clear all; close all;
+#1.f Za iste stopnje dušenja naj program izračuna in prikaže še odziv (vizh(t) = vC(t)) 
+#na enotino stopnico (vg(t) = u(t)) pri ničelnem začetnem stanju.
 
+#same as LabVaja1e.m, only diference is unit step
 
 ##konstante 1.b
 Lr = vpa ('1 / 100', 32);     %Henry
@@ -29,21 +32,27 @@ sol4 = dsolve (DE4, Uc(0) == 10, diff(Uc)(0) == 0)
 #casovna skala
 t1 = 0 : .000001 : .002;
 
- ff   = function_handle(rhs(sol));
- ff01 = function_handle(rhs(sol1));
- ff07 = function_handle(rhs(sol2));
- ff1 = function_handle(rhs(sol3));
- ff2 = function_handle(rhs(sol4));
+ff   = function_handle(rhs(sol));
+ff01 = function_handle(rhs(sol1));
+ff07 = function_handle(rhs(sol2));
+ff1 = function_handle(rhs(sol3));
+ff2 = function_handle(rhs(sol4));
 
 y  = ff(t1);
 y1 = ff01(t1); 
 y2 = ff07(t1);
 y3 = ff1(t1);
 y4 = ff2(t1);
- 
-plot(t1,y,'b', t1, y1, 'r', t1, y2, 'g', t1, y3, 'y', t1, y4, 'k')
+#Drawing  Multiple Plots on One Page with subplot 
+subplot(2,1,1)
+plot(t1,y,'b', t1, y1, 'r', t1, y2, 'g', t1, y3, 'y', t1, y4, 'k');
+legend ("R = 0", "R = 20", "R = 140", "R = 200", "R = 400");
+grid;
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 12);
+xlabel('time {\itt} [s]'); ylabel('{\itUo}({\itt}) [V]');
+title('Output voltage for example 1');
 
-#tok
+# Current calculatios
 
 IL0 = Lr*diff(rhs(sol), t)
 IL01 = Lr*diff(rhs(sol1), t)
@@ -63,5 +72,10 @@ tok_graf2 = FF07(t1);
 tok_graf3 = FF1(t1);
 tok_graf4 = FF2(t1);
 
+subplot(2,1,2)
 plot(t1,tok_graf0 ,'b', t1, tok_graf1, 'r', t1, tok_graf2, 'g', t1, tok_graf3, 'y', t1, tok_graf4, 'k')
- 
+legend ("R = 0", "R = 20", "R = 140", "R = 200", "R = 400");
+grid;
+set(gca, 'FontName', 'Times New Roman', 'FontSize', 12);
+xlabel('time {\itt} [s]'); ylabel('{\itI_L}({\itt}) [A]');
+title('Coil current for example 1');

@@ -21,11 +21,11 @@ Rn = 10;
 Lr = vpa ('1 / 100', 32);     %Henry
 Cr = vpa('1/1000000', 32);    %Farad
 Rr = vpa('1', 32);            %ohm
-Rr0 = 0;
+Rr0  = 0;
 Rr01 = 20;
 Rr07 = 140;
-Rr1 = 200;
-Rr2 = 400;
+Rr1  = 200;
+Rr2  = 400;
 ##1.a
  
 syms Uc(t) Vc(t) 
