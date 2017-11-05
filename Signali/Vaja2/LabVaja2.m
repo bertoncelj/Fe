@@ -18,10 +18,10 @@ a0 = (R2/R1) + 1
 syms il(t)
 
 DE = a2 * diff(il, t, t) + a1 * diff(il, t) + a0 * il == 0
-sol = dsolve (DE, il(0) == 1, diff(il)(0) == -R2/(Lr));
+sol = dsolve (DE, il(0) == 1, diff(il)(0) == -R2/(Lr))
 
 #transform symbolic function so it can be ploted
-ff   = function_handle(rhs(sol));
+ff   = function_handle(rhs(sol))
 
 
 #draw plot
