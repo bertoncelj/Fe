@@ -54,7 +54,7 @@ dt = 0.02;  %časovni inkrement
 
   
 #function call do_period
-  [signal, cas] = do_period(u, t, 3);
+  [signal, cas] = do_period(u, t, 20);
 
 #draw result
 plot(cas, signal)
