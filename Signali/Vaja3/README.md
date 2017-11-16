@@ -15,3 +15,8 @@ Solutions:
 ![tok iL](http://latex.codecogs.com/gif.latex?LC%5Cfrac%7Bd%5E2i_L%28t%29%7D%7Bdt%5E2%7D%20&plus;%20%5Cfrac%7BL%7D%7BR%7D%20%5Cfrac%7Bdi_L%28t%29%7D%7Bdt%7D%20&plus;%20i_L%20%3D%20i_g)
 
 
+1.g Poseben primer: Če imamo Differencialno enacbo 2 reda in forsing function je 2 reda potem je
+
+![h definicija](http://latex.codecogs.com/gif.latex?h%3Db_%7B2%7D%5Cfrac%7Bd%5E%7B2%7Dh_v%7D%7Bdt%5E%7B2%7D%7D%20&plus;%20b_%7B1%7D%5Cfrac%7Bdh_v%7D%7Bdt%7D%20&plus;%20b_%7B0%7Dh_%7Bv%7D)
+
+1.f.
