@@ -13,26 +13,36 @@
 #     ẏ   =                  C         x   +  D   u
 clear all; close all;
 #constante
-R1 = 1;
-R2 = 2;
-L1 = 1;
-L2 = 1;
-C  = 1;
+f = 1000;
+Ra = 1000;
+Rb = 2000;
+R1 = 1000;
+R2 = 1000;
+C  = 1/(2*pi*f*sqrt(R1*R2));
+C1 = C;
+C2 = C;
+tz = 0; tk = 0.01; dt = 0.000001; t=tz:dt:tk;
+
 
 #Matrike
-A = [-R1/L1, 0,    -1/L1; 
-     0,    -R2/L2,  1/L2;
-     1/C,    -1/C,     0];
-B = [1/L1, 0,0]';        #transpose
-C = [R1,   0,   0;
-     0,    R2,  0];
-D = [0 0]';               #transpose
+a11 = Rb/Ra/(R2*C1)-1/(R1*C1); a12 = -1/(R2*C1);
+a21 = Rb/Ra/(R2*C2); a22 = -1/(R2*C2);
+b11 = 0; b12 = 0; b21 = 0; b22 = 0;
+c11 = 1 + Rb/Ra; c12 = 0;
+d11 = 0; d12 = 0;
 
+A = [a11, a12; 
+     a21, a22;];
+     
+B = [b11; b12];        #transpose
+C = [c11,   c12];
+D = [0; 0];               #transpose
+sys = ss([0, 1; 2, -3], [0;  1], [1, 0; 0, 1], [0; 0]);
 figure(1)
 T = 0:0.01:10;         % simulation time = 10 seconds
-U = zeros(size(T));    % no input
+U = [zeros(size(T)) , zeros(size(T))];    % no input
 X0 = [0.1 0.1 0.1];    % initial conditions of the three states
-sys = ss(A,B,C,D);     % construct a system model
+%sys = ss(A,B,C,D);     % construct a system model
 lsim(sys, U, T, X0)    % simulate and plot the response (the output)
 title('Response to Non-Zero Initial Conditions')
 
