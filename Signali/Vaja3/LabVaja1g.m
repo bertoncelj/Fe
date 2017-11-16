@@ -1,3 +1,5 @@
+#PAZI tukej je poseben primer pri h funkciji! Glej Readme
+
 clear all; close all;
 
 dt=0.0005; tz=0; tk=15;
@@ -33,14 +35,15 @@ vg2 = sin(t);        %sinuts
 s1 = -(a1/(2*a2) + sqrt((a1/(2*a2))^2 - (a0/a2)));
 s2 = -(a1/(2*a2) - sqrt((a1/(2*a2))^2 - (a0/a2)));
 
-hv = 1/a1*exp((-a0/a1)*t).*u_t;
-dhv = 1/a1*(-a0/a1)*exp((-a0/a1)*t)+1/a1*du_t;
-ddhv = (1/a2) * (1/(s1 -s2)) * (s1^2 * exp(s1*t) - s2^2 * exp(s2*t)).*u_t + (1/a2).*du_t;
+#to je bolj podbrobo opisano o README
+hv = (1/a2)*(1/(s1-s2)) * (exp(s1*t) - exp(s2*t)).*u_t;
+dhv = (1/a2)*(1/(s1-s2)) * (s1*exp(s1*t) - s2*exp(s2*t)).*u_t;;
+ddhv = (1/a2)*(1/(s1 -s2)) * (s1^2 * exp(s1*t) - s2^2 * exp(s2*t)).*u_t + (1/a2).*du_t;
 
+#nastavek
 h=b2*ddhv + b1*dhv + b0*hv;
 
-
-
+#konvlucijski integral uporabljen
 y1 = dt * conv(h, vg1); y2 = dt * conv(h, vg2);
 
 plot(t, y1(1:(tk/dt+1)), 'r', t, y2(1:(tk/dt+1)), 'b');
