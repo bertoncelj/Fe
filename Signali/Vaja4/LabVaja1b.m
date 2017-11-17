@@ -43,7 +43,7 @@ T = 0:0.01:10;         % simulation time = 10 seconds
 U = [zeros(size(T)) , zeros(size(T))];    % no input
 X0 = [0.1 0.1 0.1];    % initial conditions of the three states
 %sys = ss(A,B,C,D);     % construct a system model
-lsim(sys, U, T, X0)    % simulate and plot the response (the output)
+lsim(sys,sys, U, T, X0)    % simulate and plot the response (the output)
 title('Response to Non-Zero Initial Conditions')
 
 #unit step

@@ -13,7 +13,7 @@ s1 = Wn * (-zeta + sqrt(zeta.^2 -1));
 s2 = Wn * (-zeta - sqrt(zeta.^2 -1));
 
 ##Discription
-
+syms T
 
 plot(real(s1), imag(s1), 'r', real(s2), imag(s2), 'g');
 axis([-20000 0 -10000 10000]); 
