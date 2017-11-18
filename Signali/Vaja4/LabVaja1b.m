@@ -58,6 +58,7 @@ sys = ss(A,B,C,D);
 Vc1 = x(:,1); Vc2 = x(:,2); vizh = y(:,1);
 
 #draw
+
 fig1 = figure(1);
 set(fig1,'Units','centimeters','Position',[1 4 14 12]);
 plot(Vc1, Vc2); axis([-2.1 2.1 -2.1 2.1]); grid;
