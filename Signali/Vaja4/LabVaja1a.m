@@ -8,8 +8,7 @@ t=0 : 0.1 : 100;
 # constant for DE
 C = 1; %HFarad
 L = 1;  %Henry
-R = [0, 0.2, 1.4, 2, 4];  %primer za R3
-%R = 2; %test R, DELETE ME later
+R = [0, 0.2, 1.4, 2, 4];  %poračunane iz podanih zeta
 
 # U definition input, both zeros matrixs
 U = [ones(length(t),1)];
@@ -26,7 +25,7 @@ V_zac_pogoj = [Vc_zac; iL_zac];
 
 
 for i = 1 : 5
-  R(i)
+  #matrix definitons
   A   = [0,      1/C;
         -1/L,  -R(i)/L];
   
@@ -68,6 +67,7 @@ xlabel('{\itt} [s]'); ylabel('{\itv_C} [V]');
 title('Časovna odvisnost spremenljivk stanj kondezatroja')
 pause(2);
 
+#draw izhodne spremeljivke tuljava
 fig3 = figure(3);
 set(fig3,'Units','centimeters','Position',[16.5 1.5 20 16]);
 plot(t,iL(:,1), t,iL(:,2), t,iL(:,3), t,iL(:,4), t,iL(:,5)); 
