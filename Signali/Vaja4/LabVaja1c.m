@@ -55,11 +55,13 @@ D   = [d11];
   
 #solving systems
 sys = ss(A,B,C_m,D);
-[y,x,t] = impulse(sys,t);
+[y,t,x] = impulse(sys,t);
   
 #zapis outs, ki je da lsim: za vse R-je
 Vc = x(:,1)
 iL = x(:,2)
 vizh = y(:,1)
+
+plot(Vc, iL)
 
 %Vc
