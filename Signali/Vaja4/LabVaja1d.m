@@ -95,7 +95,7 @@ fig2 = figure(4);
 
 set(fig2,'Units','centimeters','Position',[16.5 1.5 20 16]);
 plot(t, Vc1_sin, 'g', t, Vc2_sin, 'b', t, vizh_sin, 'r'); 
-grid;
+; grid;
 legend("Vc1", "Vc2", "output")
 xlabel('{\itt} [s]'); ylabel('{\itv_C}_1 [V], {\itv_C}_2 [V], {\itv_{izh}} [V]');
 title('Časovna odvisnost spremenljivk stanj na sinusesen signal')
