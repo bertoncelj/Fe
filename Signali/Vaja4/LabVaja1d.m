@@ -9,8 +9,8 @@ R1 = 2; #ohm
 R2 = 1; #ohm
  
 #kapacitivnost
-C1 = 1; 
-C2 = 1;
+C1 = 1; %farad
+C2 = 1; %farad
 
 #Casovni vektor
 tz = 0; tk = 20; dt = 0.1; t=tz:dt:tk;
