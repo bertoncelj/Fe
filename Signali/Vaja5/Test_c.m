@@ -15,6 +15,8 @@ y = real(ifft(Y)*N*T); % inverzni Fourierov transform
 
 
 % Grafični prikaz rezultatov
+
+#------------plot 1----------------
 fig1 = figure(1);
 set(fig1, 'Units', 'centimeters', 'Position', [1 2 15.5 14]);
 k = [0:N/2-1]';
@@ -39,4 +41,26 @@ set(gca, 'FontName', 'Times New Roman CE', 'FontSize', 9);
 xlabel('vzorci, n'); ylabel('faza X_n [°]');
 title('Diskretni fazni spekter'); 
 
+#---------plot 2-------------------------
+fig2 = figure(2);
+set(fig2, 'Units', 'centimeters', 'Position', [17.5 2 15.5 14]);
 
+subplot(3,1,1);
+p = stem(k, H(1:N/2), 'ko');
+set(p, 'LineWidth',0.5, 'MarkerSize',2, 'MarkerFaceColor','r');
+set(gca, 'FontName', 'Times New Roman CE', 'FontSize', 9);
+xlabel('vzorci, n'); ylabel('|H_n|'); grid on;
+title('Diskretni spekter prevajalne funkcije');
+
+subplot(3,1,2);
+p = stem(k, angle(H(1:N/2))*180/pi,'k');
+set(p, 'Linewidth',0.5,'MarkerSize',2, 'MarkerFaceColor','g'); grid on;
+set(gca, 'FontName', 'Times New Roman CE', 'FontSize', 9);
+xlabel('vzorci, n'); ylabel('faza H_n [°]');
+title('Diskretni fazni spekter');
+
+subplot(3,1,3);
+plot(t, x, t, h, t, y);
+set(gca, 'FontName', 'Times New Roman CE', 'FontSize', 9);
+xlabel('čas t [s]'); ylabel('x(t), h(t), y(t)'); grid on;
+title('Vzbujanje, impulzni odziv, odziv'); 
