@@ -17,7 +17,7 @@ L = 0.5;  %henry
 tz=0; tk=10; dt=0.01; t=tz:dt:tk;
 
 #Zacetne vrednosti iL(0)=1A Vc2(0) = 0V
-iL_zac = 1; Vc_zac = 0;
+iL_zac = 0; Vc_zac = 0;
 Zac_pogoj = [iL_zac; Vc_zac];
 
 # definition of A,B,C,D konstants
