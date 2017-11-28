@@ -14,18 +14,24 @@ t = tz : dt : tk; % časovni vektor
  t = t';
  end
 nk = 30;
+
 % definiranje idealnega poteka obravnavanega pulza
-t1 = tz : dt : tpz; xp1 = zeros(size(t1));
-t2 = tpz : dt : tpk; xp2 = ones(size(t2))*A;
-t3 = tpk : dt : tk; xp3 = zeros(size(t3));
+
+t1 = tz : dt : tz+T; xp1   = A / T *(t1 + T);
+t2 = tz+T : dt : tz+2*T; xp2   = A / T * t2;
+t3 = tz+2*T : dt : tz+3*T; xp3 = A / T * (t3 - T);
+
 % časovni in signalni vektor idealnega pulza
-tpp = [t1 t2 t3]; xpp = [xp1 xp2 xp3];
-a0 = A * (tpk - tpz) / T; % koeficient a0 = c0
+tpp= [t1 t2 t3]; xpp = [xp1 xp2 xp3];
+figure(4)
+plot(tpp, xpp)
+pause(4)
+a0 = A/2; % koeficient a0 = c0
 a0t = ones(size(t))*a0; % potrebno za pravilen izris na sliki
 for n = 1 : 1 : nk
 % trigonometrična vrsta
-an = A/(n*pi)*(sin(n*w0*tpk)-sin(n*w0*tpz)); % koeficienti an
-bn = A/(n*pi)*(-cos(n*w0*tpk)+cos(n*w0*tpz)); % koeficienti bn
+an = 0
+bn = -A/(n*pi);
  xn(:,n) = an * cos(n*w0*t) + bn * sin(n*w0*t);
  if n == 1
  xp(:,n) = a0 + xn(:,n);

@@ -1,26 +1,31 @@
 % Fourierova analiza: Odziv vezja RC na PERIODIČNE PRAVOKOTNE PULZE
 clear all; close all;
-A = 1; % amplituda pulzov
-T = 2*pi; % osnovna perioda
-w0 = 2*pi/T; % osnovna frekvenca
-tpz = 0; % začetek obravnavanega pulza
-tpk = T/6; % konec obravnavanega pulza
-tz = -1; tk = 3*pi; dt = 0.001;
-t = tz : dt : tk; % časovni vektor
+A = 1;                  % amplituda pulzov
+T = 2*pi;               % osnovna perioda
+w0 = 2*pi/T;            % osnovna frekvenca
+tpz = 0;                % začetek obravnavanega pulza
+tpk = tpz + T;          % konec obravnavanega pulza
+tz = -1; tk = 2; dt = 0.001;
+t = tz : dt : tk;       % časovni vektor
 [N, M] = size(t);
  if N < M,
  t = t';
  end
 nk = 30;
 % definiranje idealnega poteka obravnavanega pulza
-t1 = tz : dt : tpz; xp1 = zeros(size(t1));
-t2 = tpz : dt : tpk; xp2 = ones(size(t2))*A;
-t3 = tpk : dt : tpz+T; xp3 = zeros(size(t3));
-t4 = tpz+T : dt : tpk+T; xp4 = ones(size(t4))*A;
-t5 = tpk+T : dt : tk; xp5 = zeros(size(t5));
+t1 = tz : dt : tz+T; xp1   = A / T *(t1 + T);
+t2 = tz+T : dt : tz+2*T; xp2   = A / T * t2;
+t3 = tz+2*T : dt : tz+3*T; xp3 = A / T * (t3 - T);
+
+#test koda
+ t = [t1 t2 t3 ];
+ u = [xp1 xp2 xp3];
+fig1 = figure(4);
+    plot(t, u, 'LineWidth', 2);
+pause(4)
 
 % časovni in signalni vektor idealnega pulza
-tpp = [t1 t2 t3 t4 t5]; xpp = [xp1 xp2 xp3 xp4 xp5];
+tpp = [t1 t2 t3]; xpp = [xp1 xp2 xp3];
 a0 = A * (tpk - tpz) / T; % koeficient a0 = c0
 a0t = ones(size(t))*a0;
 C = 1; R = 1; % elementi vezja
