@@ -9,7 +9,8 @@ A = solve(f1,f2,f3,V1,Vizh,H);
 AH = A.H
 AH_collect = collect(AH)
 pretty(AH_collect)
-AH = subs(AH); AH_collect = collect(AH)
+AH = subs(AH); 
+AH_collect = collect(AH)
 [b, a] = numden(AH)
 b = sym2poly(b)
 a = sym2poly(a)
