@@ -13,12 +13,12 @@ LHS = LDx + a0*Lx;
 RHS = laplace(rhs,t,s); % The t and s in laplace aren't necessary, as they are default
 IVP = LHS - RHS;
 
-coeff = coeffs(IVP,X);
+coeff = coeffs(IVP,X)
 IVPEQ = coeff*[1;X] == 0;
 
-X = solve(IVPEQ,X);
+X = solve(IVPEQ,X)
 
-X = partfrac(X);
+X = partfrac(X)
 
 sol = ilaplace(X, s, t)
 
