@@ -1,4 +1,7 @@
-close all; clear all;
+clear all; close all;
+
+%vrednosti elementov -> se jih ne rabi ker funkcijo dobim drugace
+#R1=1; R2=2; L=0.5; C=0.25;
 
 #Casovni vektor
 tz=0; tk=15; dt=0.01;
@@ -8,10 +11,10 @@ t=tz:dt:tk;
 syms s
 
 #function from LTI system calculated by MATLAB
-fun = 8/(s^3 + 9*s^2 + 22*s +32)
+func = (3*s^3 + 4*s^2 + 48*s + 32)/(2*s^3 + 32*s + 32)
 
 #seperate on numeretor and denominator
-[num, den] = numden(fun)
+[num, den] = numden(func)
 
 #just take constants
 a = sym2poly(num,s)
@@ -32,13 +35,12 @@ k %konstants
 h = tf(A,B)
 u = sin(2*t) + 0.2*sin(20*t) + 0.1*sin(100*t);
 
-#
+#claculate inpust signals
 y_step = step(h,t);           %step input
 y_impulse = impulse(h, t);    %impluse imput
 Ug_sin_singal = lsim(h,u,t);  %sin input
 
 #draw
-%y_impulse = impulse(b,a,t); y_step = step(b,a,t); u=sin(2*pi*t); y_lsim=lsim(b,a,u,t);
 
 fig1 = figure(1); set(fig1, 'Units', 'centimeters', 'Position', [1 2 12 11]);
 plot(t, y_impulse, 'k', 'LineWidth', 1); grid;
