@@ -2,24 +2,18 @@ clear all; close all;
 R=1; L=1; C=1; 
 
 
-syms s 
-syms x real
+%I_r(s) ->z(s)
+syms s z(s)
+syms I_c(s) I_r(s) 
+syms  H(x) 
 
 
-syms x y s
-syms Is(s) I_c(s) I_r(s) 
-syms Vs(s) H(s) 
+f2 = 1/(C*s)   == R*z + L*s*z
+f4 = z  == (1/(C*s))/(R + L*s)
+f6 = H == (1/(C*x))/(C*x*(1/(C*x)) + (1/(C*x))/(R + L*x))
 
-
-f1 = Is   == I_c + I_r;
-f2 = Vs   == R*I_r + L*s*I_r
-f3 = Vs   == 1/(C*s)
-f4 = I_r  == Vs/(R + L*s)
-f5 = I_c  == C*s*Vs
-f6 = H == Vs/Is
-
-A = solve(f1,f2,f3,f4,f5,f6, H)
-
+A = solve(f6, H)
+new =  A^-1
 
 
 
