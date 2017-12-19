@@ -1,71 +1,79 @@
 clear all; close all;
 
-%vrednosti elementov -> se jih ne rabi ker funkcijo dobim drugace
-#R1=1; R2=2; L=0.5; C=0.25;
+#symbolic sytem
+syms x(t) s X;
 
-#Casovni vektor
-tz=0; tk=15; dt=0.01;
+#define coiff in circuit
+R1 = 1; 
+R2 = 1; 
+gm = 1; 
+C1 = vpa ('1 / 4', 32);     %Farad
+C2 = vpa('1/2', 32);        %Farad
+L  = vpa('1/2', 32);         %Henry
+
+#original rhs VG signal 
+#coifficients of Vg signal transform in c0, c1, c2 
+#beacuse passing floating-point values to sym is dangerous
+c0 = 1;
+c1 = vpa ('1/5', 32);
+c2 = vpa ('1/10', 32);
+rhs = c0*sin(2*t) + c1*sin(20*t) + c2*sin(100*t);
+
+#transfrom lhs to LHS
+  #coificinets
+  a3 = R1*C1*L*C2;
+  a2 = C1*L*R2*R1;
+  a1 = R1*C2;
+  a0 = R1(1/R2 - gm +1);
+  
+  #start possition
+  x0 = 0;
+  x1 = 0;
+  xdot0 = 0;
+  
+  #LT for eaxh diff equation
+  Lx   = X;
+  LTx  = s*X;
+  LT2x = s^2*X;
+  LT3x = s^3*X;
+
+LHS = a3*LT3x + a2*LT2x + a1*LTx + a0*Lx;
+
+#transform rhs to RHS
+RHS = laplace(rhs,t,s); % The t and s in laplace aren't necessary, as they are default
+
+#getter both equations
+IVP = LHS - RHS;
+
+coeff = coeffs(IVP,X);
+IVPEQ = coeff*[1;X] == 0;
+
+X = solve(IVPEQ,X);
+
+X = partfrac(X);
+
+sol = ilaplace(X, s, t)
+
+#STAPH
+printf("We pause program. Press ENTER to continue! \n");
+pause;
+
+#DRAW
+#Translate solutions to functions  for numeric solution
+printf("Numeric translate solution: \n");
+ff   = function_handle(sol)
+
+#time vector to draw
+tz=0; tk=10; dt=0.001;
 t=tz:dt:tk;
+y  = ff(t);
 
-#create symbolic operators
-syms s
+#plot of input Vg to output
+fig1 = figure(1);
+plot(t, y);
 
-#function from LTI system calculated by MATLAB
-func = (3*s^3 + 4*s^2 + 48*s + 32)/(2*s^3 + 32*s + 32)
-
-#seperate on numeretor and denominator
-[num, den] = numden(func)
-
-#just take constants
-a = sym2poly(num,s)
-b = sym2poly(den,s)
-
-#convert symbolic to numerical
-A = double(a) 
-B = double(b)
-
-#calcuate Zeros, pols, and Konstants
-[z, p, k] = tf2zp (A, B)
-z %zero
-p %pols 
-k %konstants
-
-
-#build system LTI
-h = tf(A,B)
-u = sin(2*t) + 0.2*sin(20*t) + 0.1*sin(100*t);
-
-#input voltage to laplace transform
-Vg=laplace(u,s)
-
-#claculate inpust signals
-y_step = step(h,t);           %step input
-y_impulse = impulse(h, t);    %impluse imput
-Ug_sin_singal = lsim(h,u,t);  %sin input
-
-#draw
-
-fig1 = figure(1); set(fig1, 'Units', 'centimeters', 'Position', [1 2 12 11]);
-plot(t, y_impulse, 'k', 'LineWidth', 1); grid;
-xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
-title('Časovni odziv na enotin impulz');
+grid;
+xlabel('čas {\itt} [s]'); 
+ylabel('{\itv}_i_z_h [V]');
+title('Časovni odziv na vhodni signal');
 pause(1);
-
-fig3 = figure(3)
-plot(t, y_step, 'k', 'LineWidth', 1); grid;
-xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
-title('Časovni odziv na enotino stopnico');
-pause(3)
-fig2 = figure(2); set(fig2, 'Units', 'centimeters', 'Position', [14 2 12 11]);
-plot(t,Ug_sin_singal,'r','LineWidth',2); grid;
-legend("u = sin(2*t) + 0.2*sin(20*t) + 0.1*sin(100*t);")
-xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
-title('Časovni odziv na vhodni signal')
-pause(2);
-
-figure(4)
- set(fig3, 'Units', 'centimeters', 'Position', [27 2 12 11]);
-plot(p,'rx','LineWidth',2); hold on; plot(z,'go','LineWidth',2); grid;
-xlabel('Re[s]'); ylabel('Im[s]');
-title('Poli(x) in ničle (o) prevajalne funkcije {\itH}({\its})') 
-pause(4)
