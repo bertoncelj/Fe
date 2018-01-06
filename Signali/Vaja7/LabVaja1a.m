@@ -11,7 +11,7 @@ sys = tf(numer,denom);
 fig1 = figure(1);
 w = logspace(-1, 5, 200); % 900 pt w vector from 1krad/s (10^1) to 1Mrad/s (10^18)
 [mag_basic, phase_basic] = bode(sys, w);
-bode(sys, w);
+bode(sys, w)
 pause(1);
 
 

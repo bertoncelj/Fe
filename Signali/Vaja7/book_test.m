@@ -1,13 +1,18 @@
 clear all; close all;
+
 w = logspace(-2,3); 
 A0 = 1; 
-wm = 1;
-
+wm = 50;
+#zapisemo ulomek
 num = [A0*wm];
- 
 den = [1 wm];
-[mag, phase] = bode(num, den, w);
+#naredimo system matriko
+sys = tf(num, den);
+
+#pretvori v bode
+[mag, phase] = bode(sys, w);
 dbmag = 20*log10(mag);
+
 fig1 = figure(1);
 set(fig1,'Units','centimeters','Position',[5 2 20 18]);
 subplot(2,1,1);
