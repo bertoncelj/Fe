@@ -10,10 +10,10 @@
 %wp2 = 10^6;
 %wp3 = 10^7;
 
-G0  = vpa('10000', 64);
-wp1 = vpa('100000', 64);
-wp2 = vpa('1000000', 64);
-wp3 = vpa('10000000', 64);
+G0  = vpa('10000', 32);
+wp1 = vpa('100000', 32);
+wp2 = vpa('1000000', 32);
+wp3 = vpa('10000000', 32);
 
 # a.) S pomočjo Routhovega kriterija ugotovite, pri katerih vrednostih β je sistem stabilen,
 #     nestabilen oz. mejno (ne)stabilen. 
@@ -47,4 +47,35 @@ c1 = a0;
   
   %c1:
   solve(0 < c1, B)
-  R = 8223372036854775807/ 10000000000000000000000
+ printf("Meja je za B (beta): %d \n", 1234);
+ 
+# b. Z uporabo ukaza rlocus narišite diagram lege korenov v ravnini
+
+#DIAGRAM LEGE KORENOV
+%sybolic to numberic
+Beta = [10^-4]; %ta je na roko not dana
+
+a0
+G0  = double(G0)
+wp1 = double(wp1)
+wp2 = double(wp2)
+wp3 = double(wp3)
+
+a0 = wp1*wp2*wp3*(1 + Beta*G0);
+a1  = double(a1)
+a2  = double(a2)
+a3  = double(a3)
+
+  num =  [G0*wp1*wp2*wp3]
+  den = [a3 a2 a1 a0]
+  
+   sys = tf(num, den);
+   #draw rlocus graphics_toolkit
+   fig1 = figure(1);
+    rlocus (sys)
+    title("Diagram lege porenov");
+    pause(1);
+
+
+ 
+ 
