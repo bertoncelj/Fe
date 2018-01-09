@@ -8,13 +8,13 @@ close all; clear all; clc;
 
 #Nastavitve 
   %w od kje do kje risat
-  w = logspace(3,8, 1000);  #Frekvenca od kje rasati
+  w = logspace(3,8, 10000);  #Frekvenca od kje rasati
   r_zac = 1e3;
   r_kon = 1e8; 
   razpone = [r_zac r_kon];
   %Nastevitem magnetud amplitudnega grafa
-  mag_low =  0;    
-  mag_high = 80;
+  mag_low =  -180;    
+  mag_high = 180;
 
 #Data:
 wp1 = 10^5;
@@ -42,7 +42,7 @@ wp3 = 10^7;
 
   fig1 = figure(1);
   %Bode Graph Computer Real Line
-  semilogx(w, dbmag, 'g', 'LineWidth', 2); 
+  semilogx(w, phase, 'g', 'LineWidth', 2); 
   hold on;
 
  
@@ -62,18 +62,18 @@ wp3 = 10^7;
   den = [a3 a2 a1 a0];
   
   sys = tf(num, den);
-  [mag] = bode(sys, w);
+  [mag, phase] = bode(sys, w);
   dbmag = 20*log10(mag);
   
  
   #Draw
  
-    semilogx(w, dbmag, barva(i), 'LineWidth', 2);
+  semilogx(w, phase, barva(i), 'LineWidth', 2);
   endfor
  axis([ razpone mag_low mag_high])
  xlabel('frekvencaa {\itw} [rad/s]'); ylabel('{\itM} [dB]');
-  legend("Original", "Beta1","Beta 2","Beta 3")
- grid on; title('Amplitudna karakteristika');
+  legend("Original", "Beta1", "Beta 2", "Beta 3")
+ grid on; title('Phase karakteristika');
  pause(1);
 
 

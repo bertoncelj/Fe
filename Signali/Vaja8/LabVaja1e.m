@@ -9,12 +9,8 @@ close all; clear all; clc;
 #Nastavitve 
   %w od kje do kje risat
   w = logspace(3,8, 1000);  #Frekvenca od kje rasati
-  r_zac = 1e3;
-  r_kon = 1e8; 
-  razpone = [r_zac r_kon];
   %Nastevitem magnetud amplitudnega grafa
-  mag_low =  0;    
-  mag_high = 80;
+
 
 #Data:
 wp1 = 10^5;
@@ -27,7 +23,7 @@ wp3 = 10^7;
   G0 = 10^4;
   
   %Dominator
-  a3 = 1;
+  a3 = 1; 
   a2 = wp1 + wp2 + wp3;
   a1 = wp1*wp2 + wp1*wp3 + wp2*wp3;
   a0 = wp1*wp2*wp3;
@@ -37,16 +33,19 @@ wp3 = 10^7;
   den = [a3 a2 a1 a0];
   
   sys = tf(num, den);
-  [mag, phase] = bode(sys, w);
-  dbmag = 20*log10(mag);
+  [re, im] = nyquist(sys, w);
 
   fig1 = figure(1);
   %Bode Graph Computer Real Line
-  semilogx(w, dbmag, 'g', 'LineWidth', 2); 
+  plot(re, im, 'g'); grid on; 
   hold on;
 
+ #Enotski krog
+ x = -0.707; y = 0.707; y1 = -0.707;
+ k = 0:0.01:2*pi; re = cos(k); im = sin(k);
+ plot(re, im, 'b')
  
-#H(s)
+#H(s) 
   %Numerator
   G0 = 10^4;
   B = [ 0.012210 0.00148  0.2265];
@@ -55,25 +54,22 @@ wp3 = 10^7;
   a3 = 1;
   a2 = wp1 + wp2 + wp3;
   a1 = wp1*wp2 + wp1*wp3 + wp2*wp3;
-  a0 = wp1*wp2*wp3*(1 + B(i)*G0);
+  a0 = wp1*wp2*wp3;
     
   #Draw Bode of G(s)
-  num = [G0*wp1*wp2*wp3];
+  num = [G0*wp1*wp2*wp3*B(i)];
   den = [a3 a2 a1 a0];
   
   sys = tf(num, den);
-  [mag] = bode(sys, w);
-  dbmag = 20*log10(mag);
-  
+  [re, im] = nyquist(sys, w);
  
-  #Draw
- 
-    semilogx(w, dbmag, barva(i), 'LineWidth', 2);
+  #Draw 
+  plot(re, im, barva(i));
   endfor
- axis([ razpone mag_low mag_high])
- xlabel('frekvencaa {\itw} [rad/s]'); ylabel('{\itM} [dB]');
-  legend("Original", "Beta1","Beta 2","Beta 3")
- grid on; title('Amplitudna karakteristika');
+  axis([-2 2 -2 2])
+  xlabel('Re [H(jw)]'); ylabel('Im [H(jw)]');
+  legend("Zeta -> 0.1", "Zeta -> 0.2", "Zeta -> 0.3", "Zeta -> 0.5", "Zeta -> 0.7", "Zeta -> 1");
+  title('Polarni diagram'); 
  pause(1);
 
 

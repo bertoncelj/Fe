@@ -53,7 +53,7 @@ c1 = a0;
 
 #DIAGRAM LEGE KORENOV
 %sybolic to numberic
-Beta = [10^-4]; %ta je na roko not dana
+Beta = [0]; %ta je na roko not dana
 
 a0
 G0  = double(G0)
@@ -67,12 +67,25 @@ a2  = double(a2)
 a3  = double(a3)
 
   num =  [G0*wp1*wp2*wp3]
-  den = [a3 a2 a1 a0]
+  den =  [a3 a2 a1 a0]
   
    sys = tf(num, den);
-   #draw rlocus graphics_toolkit
+   
+#draw rlocus graphics_toolkit
+%   Block Diagram
+%
+% u    +         +---+      +------+             y
+%- ----->(+)---- >|k |----->|SISO |-------+------->
+%         ^ -     +---+      +------+       |
+%         |                                 |
+%         +---------------------------------+
+#Rlocus vzame osnovno zanko in namesto k-ja poganja B od ena do enke druge vrednosti
+#Zato je treba B 
+
    fig1 = figure(1);
-    rlocus (sys)
+    rlocus (sys); 
+    
+    
     title("Diagram lege porenov");
     pause(1);
 
