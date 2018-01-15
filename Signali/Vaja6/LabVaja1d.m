@@ -1,7 +1,7 @@
 close all; clear all;
 
 #Casovni vektor
-tz=0; tk=15; dt=0.01;
+tz=0; tk=3.5*10^-4; dt=0.000001;
 t=tz:dt:tk;
 
 #create symbolic operators
@@ -12,9 +12,10 @@ R1 = 10^4;
 R2 = 10^4;
 R3 = 50*10^3;
 C  = 400*10^-12;
+w  = 50000;
 
 #function from LTI system calculated by MATLAB
-fun = (C*R3*R1*s^2 -R2*s)/(5*10^8*s^2 + 1.25*10^18)
+fun = -(-C*R3*R1*s^2 + R2*s)/(s^3*C*R1 + s^2*R1*R3 + s*R1*C*w^2 + R1*R3*w^2)
 
 #seperate on numeretor and denominator
 [num, den] = numden(fun)
