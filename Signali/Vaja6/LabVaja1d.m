@@ -1,49 +1,72 @@
-clear all; close all; 
-R1=10000; R2=10000; C = 400*10^-12; R3 = 50000;                     
-% vrednosti elementov
-syms s t Vg V1 Vizh H;
-f1 = '-(Vg-V1)/R1+(V1-Vizh)/R2';              
-f2 = '-(Vg-V1)*C*s+V1/R3'; 
-f3 = 'H=Vizh/Vg';
-A = solve(f1,f2,f3,'V1,Vizh,Vg,H'); 
- 
-vg=cos(50000*t);
-Vg=laplace(vg,s)
-Vizh = A.H*Vg  %v laplacovem prostoru je konvolucija produkt prevajalne funkcije in Laplaca od vhodnega signala
-Vizh=subs(Vizh)
-[b, a] = numden(Vizh) 
-b = sym2poly(b) 
-a = sym2poly(a)
+close all; clear all;
 
-[R,P,K]=residue(b,a)
-[n,p,k]=tf2zp(b,a) 
- 
- if size(K) == 0
-     Vizh_r = 0
- else
-     Vizh_r = K
- end
- for i = 1:length(R)
-     Vizh_r=Vizh_r+R(i)/(s-P(i))
- end
- vizh= ilaplace(Vizh_r)
- pretty(vpa(vizh,4))
-t = 0:0.01:10;
-vg=cos(50000*t)*ones(size(t));
-vizh=subs(vizh)
+#Casovni vektor
+tz=0; tk=15; dt=0.01;
+t=tz:dt:tk;
 
- fig1 = figure(1);   set(fig1, 'Units', 'centimeters', 'Position', [1 2 12 11]); 
-subplot(2,2,1); 
-plot(t, vizh, 'r'); grid; xlabel('èas {\itt}  [s]'); ylabel('Vizh[V]'); 
-title('Odziv na poljubni signal'); 
-subplot(2,2,3); 
-plot(t, vg, 'k'); grid; xlabel('èas {\itt}  [s]'); ylabel('Vg[V]'); 
-title('Vhodni signal'); 
-subplot(2,2,2);
-plot(p,'rx','LineWidth',2); hold on;  plot(n,'go','LineWidth',2); grid; 
-xlabel('Re[s]'); ylabel('Im[s]'); 
-title('Poli(x) in nièle (o) prevajalne funkcije {\itH}({\its})') 
-subplot(2,2,4);
-plot(R,'rx','LineWidth',2); hold on;   
-xlabel('Re[s]'); ylabel('Im[s]'); 
-title('Residui prevajalne funkcije {\itH}({\its})') 
+#create symbolic operators
+syms s
+
+#input data
+R1 = 10^4;
+R2 = 10^4;
+R3 = 50*10^3;
+C  = 400*10^-12;
+
+#function from LTI system calculated by MATLAB
+fun = (C*R3*R1*s^2 -R2*s)/(5*10^8*s^2 + 1.25*10^18)
+
+#seperate on numeretor and denominator
+[num, den] = numden(fun)
+
+#just take constants
+a = sym2poly(num,s)
+b = sym2poly(den,s)
+
+#convert symbolic to numerical
+A = double(a) 
+B = double(b)
+
+#calcuate Zeros, pols, and Konstants
+[z, p, k] = tf2zp (A, B)
+z %zero
+p %pols 
+k %konstants
+
+
+#build system LTI
+h = tf(A,B)
+u = cos(50000*t);
+
+#
+y_step = step(h,t);           %step input
+y_impulse = impulse(h, t);    %impluse imput
+Ug_sin_singal = lsim(h,u,t);  %sin input
+
+#draw
+%y_impulse = impulse(b,a,t); y_step = step(b,a,t); u=sin(2*pi*t); y_lsim=lsim(b,a,u,t);
+
+%fig1 = figure(1); set(fig1, 'Units', 'centimeters', 'Position', [1 2 12 11]);
+%plot(t, y_impulse, 'k', 'LineWidth', 1); grid;
+%xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
+%title('Časovni odziv na enotin impulz');
+%pause(1);
+
+%fig3 = figure(3)
+%plot(t, y_step, 'k', 'LineWidth', 1); grid;
+%xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
+%title('Časovni odziv na enotino stopnico');
+%pause(3)
+fig2 = figure(2); set(fig2, 'Units', 'centimeters', 'Position', [14 2 12 11]);
+plot(t,Ug_sin_singal,'r','LineWidth',2); grid;
+legend("cos(50000*t)")
+xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
+title('Časovni odziv na vhodni signal')
+pause(2);
+%
+%figure(4)
+% set(fig3, 'Units', 'centimeters', 'Position', [27 2 12 11]);
+%plot(p,'rx','LineWidth',2); hold on; plot(z,'go','LineWidth',2); grid;
+%xlabel('Re[s]'); ylabel('Im[s]');
+%title('Poli(x) in ničle (o) prevajalne funkcije {\itH}({\its})') 
+%pause(4)
