@@ -54,23 +54,25 @@ tz = 0; tk = 50; dt = tk/1000; t = tz : dt : tk; % èasovni vektor
 sys = tf(A_num, B_den);
 % odziv na enotin impulz
 v2 = impulse(sys, t);
-figure
+fig 1 = figure(1)
 plot(t, v2); grid;
 xlabel('t [sec]'); ylabel('vizh [V]'); 
 title('Odziv na enotin impulz'); 
+pause(1)
 
 % odziv na enotino stopnico
 v2 = step(sys, t);
-figure
+fig2 = figure(2);
 plot(t, v2); grid;
 xlabel('t [sec]'); ylabel('vizh [V]'); 
 title('Odziv na enotino stopnico'); 
+pause(2);
 
 % odziv na poljuben vhodni signal
 v1 = sin(t)+sin(10*t)+sin(100*t); % vhodni signal
 v2 = lsim(sys, v1, t); % odziv, izhodni signal
-figure
-plot(t, v1, t, v2); grid;
+fig3 = figure(3);
+plot(t, v1,'b' t, v2,'r'); grid;
 xlabel('t [sec]'); ylabel('vizh [V]'); 
 title('Odziv na sestavljeni signal'); 
 
@@ -79,7 +81,7 @@ w = linspace(0, 2.5, 1000);
 [mag, phase] = bode(sys, w);
 figure
 subplot(2, 1, 1)
-plot(w, mag); axis([0 2.5 0 1.2]); grid;
+plot(w, mag, 'r'); axis([0 2.5 0 1.2]); grid;
 xlabel('frekvenca w [rad/s]'); ylabel('M');
 title('Amplitudna karakteristika');
 subplot(2, 1, 2)
