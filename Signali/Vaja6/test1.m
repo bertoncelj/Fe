@@ -29,7 +29,17 @@ k %konstants
 h = tf(A,B)
 
 t = 0:0.01:10;
-y_impulse = impulse(h,t); y_step = step(h,t); u=sin(2*pi*t); y_lsim=lsim(h,u,t);
+
+#Generiran inpulz na roko
+U_imp = zeros(size(t));
+U_imp(1) = 1;
+
+  
+ y_impulse = lsim(h, U_imp, t);
+ y_step = step(h,t); 
+ u=sin(2*pi*t);
+ y_lsim=lsim(h,u,t);
+ 
 fig1 = figure(1); set(fig1, 'Units', 'centimeters', 'Position', [1 2 12 11]);
 subplot(2,1,1);
 plot(t, y_impulse, 'k', 'LineWidth', 1); grid;
@@ -44,6 +54,7 @@ plot(t,y_lsim,'k','LineWidth',2); grid;
 xlabel('čas {\itt} [s]'); ylabel('{\itv}_i_z_h [V]');
 title('Časovni odziv na vhodni signal')
 fig3 = figure(3); set(fig3, 'Units', 'centimeters', 'Position', [27 2 12 11]);
-plot(p,'rx','LineWidth',2); hold on; plot(z,'go','LineWidth',2); grid;
+plot(p,'rx','LineWidth',2); hold on; 
+plot(z,'go','LineWidth',2); grid;
 xlabel('Re[s]'); ylabel('Im[s]');
 title('Poli(x) in ničle (o) prevajalne funkcije {\itH}({\its})') 
