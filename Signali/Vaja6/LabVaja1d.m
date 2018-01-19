@@ -16,7 +16,6 @@ w  = 50000;
 
 #function from LTI system calculated by MATLAB
 fun = (C*R3*R1*s + (R2*R3 + R1*R3 - R1))/(s*C*R1*R3 + R1)
-R = R2*R3 + R1*R3 - R1
 #seperate on numeretor and denominator
 [num, den] = numden(fun)
 
