@@ -88,6 +88,64 @@ close all; clear all; clc;
   grid on; title('Amplitudna karakteristika');
  
  pause(1);
+ 
+ 
+ #=================PHASE=========================
+   for i=1:length(zeta)
+    wn = 1; 
+
+  num =  1 * [ 1 ];
+  den = [1 2*zeta(i) 1];
+ 
+
+ #PHASE
+ #BODE COMPUTER DRAW =======  
+  #naredimo system matriko
+  sys = tf(num, den);
+  #pretvori v bode
+  [mag, phase] = bode(sys, w);
+  phase;
+  
+
+  %poiscemo zeto numerator
+  zeta_num = 18/(2*sqrt(900));
+  wn = 30;
+  %poiscemo zeto dominator
+  zeta_dom = 1;
+
+#Prepisani poli, nicle, konstanta    
+  a = 5;
+  b = 30;
+  c = 90;
+  d = 1000;
+
+#Zapisemo v vektor "frekvenc", za manj pisanja in racunaja pri izrisu grafa
+%poli = [r_zac, 30,  90, 1000, r_kon]
+
+#Oznacimo zacetek in konec
+  razpone = [r_zac r_kon];
+  
+
+#Draw diagrom
+  fig1 = figure(2);
+  set(fig1,'Units','centimeters','Position',[5 2 20 18]);
+  %Bode Graph Computer Real Line
+   hold on;
+  semilogx(w, phase, barva(i), 'LineWidth', 2); hold on;
+
+  
+  axis([ razpone mag_low mag_high])
+   
+   
+   endfor
+  xlabel('frekvenca {\itw} [rad/s]'); ylabel('{\itfi} [^o]');
+  grid on; title('Fazna karakteristika') 
+  legend("Zeta -> 0.1", "Zeta -> 0.2", "Zeta -> 0.3", "Zeta -> 0.5", "Zeta -> 0.7", "Zeta -> 1");
+
+ 
+ pause(2);
+ 
+ 
 #==================POLAR DIAGRAM========================
 for i= 1:length(zeta)
 
@@ -95,7 +153,7 @@ for i= 1:length(zeta)
   den = [1 2*zeta(i) 1];
   sys = tf(num, den);
   [re, im] = nyquist(sys, w);
- fig2 = figure(2);
+ fig2 = figure(3);
   
   hold on;
   plot(re, im, barva(i)); grid on;
@@ -104,6 +162,6 @@ for i= 1:length(zeta)
   xlabel('Re [H(jw)]'); ylabel('Im [H(jw)]');
   legend("Zeta -> 0.1", "Zeta -> 0.2", "Zeta -> 0.3", "Zeta -> 0.5", "Zeta -> 0.7", "Zeta -> 1");
   title('Polarni diagram'); 
- pause(2);
+ pause(3);
 
  
