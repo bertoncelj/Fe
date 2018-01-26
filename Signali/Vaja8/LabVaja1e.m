@@ -1,5 +1,5 @@
 close all; clear all; clc;
-#Bode digram
+#Bode digram Phase
 
 #                    G0
 # G(s) = ------------------------------
@@ -16,7 +16,9 @@ close all; clear all; clc;
 wp1 = 10^5;
 wp2 = 10^6;
 wp3 = 10^7;
-
+ 
+ %Nastavitve za risanje grafa
+ naslov_grafa = [ "mejno stabilen"; "Stabilen"; "Nestabilen"];
  barva = ['k', 'r', 'm', 'b', 'y', 'm'];
 #G(s)
   %Numerator
@@ -37,7 +39,8 @@ wp3 = 10^7;
 
   fig1 = figure(1);
   %Bode Graph Computer Real Line
-  plot(re, im, 'g'); grid on; 
+  #plot(re, im, 'g'); 
+  grid on; 
   hold on;
 
  #Enotski krog
@@ -67,8 +70,9 @@ wp3 = 10^7;
   plot(re, im, barva(i));
   endfor
   axis([-2 2 -2 2])
+  call_string = cellstr(naslov_grafa);
+  legend(["-", call_string(1), call_string(2), call_string(3)])
   xlabel('Re [H(jw)]'); ylabel('Im [H(jw)]');
-  legend("Zeta -> 0.1", "Zeta -> 0.2", "Zeta -> 0.3", "Zeta -> 0.5", "Zeta -> 0.7", "Zeta -> 1");
   title('Polarni diagram'); 
  pause(1);
 
