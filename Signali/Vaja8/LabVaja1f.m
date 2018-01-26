@@ -13,11 +13,11 @@ wp3 = 10^7;
 
 #Za izris grafa nastavljeni vektorji, za vsako beto posebej
   barva = ['k', 'r', 'm', 'b', 'y', 'm'];
-  barve = ['r', 'b', 'g', 'm', 'k']
+  barve = ['r', 'b', 'g', 'm', 'k'];
   B = [0 0.012210 0.00148  0.2265];
   naslov_grafa = ["Brez povratne zanke"; "mejno stabilen"; "Stabilen"; "Nestabilen"];
   osi_mag = [0, 10000, 180, 900];
-  osi_cas = [0.0001, 2e-05, 6e-05]
+  osi_cas = [0.0001, 2e-05, 6e-05];
  
  
   # DRAW GRAPHS
@@ -35,9 +35,9 @@ wp3 = 10^7;
     y = step(sys, t);
       
     fig = figure(i)
-    plot(t, y, barve(i))
-    axis([0 osi_cas(i) osi_mag(1) osi_mag(i+1)])
-    call_string = cellstr(naslov_grafa)
+    plot(t, y, barve(i));
+    axis([0 osi_cas(i) osi_mag(1) osi_mag(i+1)]);
+    call_string = cellstr(naslov_grafa);
     title(call_string(i));
     pause(i);
   endfor
@@ -48,6 +48,7 @@ wp3 = 10^7;
   %   Zato se ga posebej racuna, da se vzame samo nekej 1000 prvih rezultatov in graf omeji njegov casovn raznose
   
   # Poracunamo senkrat polinosko enacbo za nestabilen sistem
+  printf("Calculating NESTABILEM sistem. \n Please waite... \n");
   a3 = 1; 
   a2 = wp1 + wp2 + wp3;
   a1 = wp1*wp2 + wp1*wp3 + wp2*wp3;
@@ -68,8 +69,9 @@ wp3 = 10^7;
   y_shift = vertcat(a', y) ;
   t_shift = vertcat(t', ones');
 
+  printf("Done calculating!\n");
   #Izris grafa NESTABILEN
-  figure(4)
+  fig = figure(4)
   plot(t_shift, y_shift, barve(4))
   axis([0 3e-06 -30 30])
   title(call_string(4));
