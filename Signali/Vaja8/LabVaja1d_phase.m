@@ -70,7 +70,7 @@ wp3 = 10^7;
  
   semilogx(w, phase, barva(i), 'LineWidth', 2);
   endfor
- axis([ razpone mag_low mag_high])
+ axis([ razpone -300 mag_high])
  xlabel('frekvencaa {\itw} [rad/s]'); ylabel('{\itM} [dB]');
   legend("Original", "Beta1", "Beta 2", "Beta 3")
  grid on; title('Phase karakteristika');
