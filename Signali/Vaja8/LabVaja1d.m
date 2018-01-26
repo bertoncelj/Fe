@@ -1,20 +1,27 @@
 close all; clear all; clc;
 #Bode digram
 
+
+# Sistem G(jω) brez povratne vezave
 #                    G0
 # G(s) = ------------------------------
 #         (1+s/wp1)(1+s/wp2)(1+s/wp3)
 
 
+# Sistem celotnega sistema H(jω)
+#             G(s)
+# H(s) = --------------
+#         1 + K(s)*G(s)
+
 #Nastavitve 
-  %w od kje do kje risat
+  %w od kje do kje risapt
   w = logspace(3,8, 1000);  #Frekvenca od kje rasati
   r_zac = 1e3;
   r_kon = 1e8; 
   razpone = [r_zac r_kon];
   %Nastevitem magnetud amplitudnega grafa
-  mag_low =  0;    
-  mag_high = 80;
+  mag_low  =  -20;    
+  mag_high =  100;
 
 #Data:
 wp1 = 10^5;
@@ -22,7 +29,9 @@ wp2 = 10^6;
 wp3 = 10^7;
 
  barva = ['k', 'r', 'm', 'b', 'y', 'm'];
-#G(s)
+
+#I. sistema G(jω) brez povratne vezave,
+
   %Numerator
   G0 = 10^4;
   
@@ -46,10 +55,14 @@ wp3 = 10^7;
   hold on;
 
  
-#H(s)
+#II. celotnega sistema H(jω):
+# 1. za vrednost β, pri kateri je sistem mejno (ne)stabilen,
+# 2. za vrednost β, pri kateri je sistem stabilen in je fazni razloček ali fazna varnost Φm ≈ +45⁰,
+# 3. za vrednost β, pri kateri je sistem nestabilen in je fazni razloček ali fazna varnost Φm ≈ ‒ 45⁰
+
   %Numerator
   G0 = 10^4;
-  B = [ 0.012210 0.00148  0.2265];
+  B = [ 0.012210 0.00148  0.2265]; # 1. mejno nestabilen, 2. stabilen s fazno varnostjo +45 3. nestabilen z fazno varnostjo -45
  for i = 1:length(B);
   %Dominator
   a3 = 1;
@@ -67,12 +80,11 @@ wp3 = 10^7;
   
  
   #Draw
- 
-    semilogx(w, dbmag, barva(i), 'LineWidth', 2);
+  semilogx(w, dbmag, barva(i), 'LineWidth', 2);
   endfor
  axis([ razpone mag_low mag_high])
  xlabel('frekvencaa {\itw} [rad/s]'); ylabel('{\itM} [dB]');
-  legend("Original", "Beta1","Beta 2","Beta 3")
+  legend("Original", "mejno stabilen","stabilen","nestabilen")
  grid on; title('Amplitudna karakteristika');
  pause(1);
 
