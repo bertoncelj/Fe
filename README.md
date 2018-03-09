@@ -1,7 +1,7 @@
 # Fe
 
 
-[Spletna učinlica](http://latex.codecogs.com/eqneditor/editor.php), do gradiv. 
+[Spletna učinlica](https://e.fe.uni-lj.si/home/#home_home), do gradiv. 
 
 Uni faks data
 * Signali in Sistemi
