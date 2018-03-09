@@ -1,8 +1,13 @@
 # Fe
 
+
+[Spletna učinlica](http://latex.codecogs.com/eqneditor/editor.php), do gradiv. 
+
 Uni faks data
-* Signals
+* Signali in Sistemi
 * Energy
+* Digitalni signali in sistemi
+
 
 Adding equations ito readme.md
 
